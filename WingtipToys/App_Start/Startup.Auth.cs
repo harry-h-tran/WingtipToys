@@ -8,6 +8,10 @@ using Microsoft.Owin.Security.DataProtection;
 using Microsoft.Owin.Security.Google;
 using Owin;
 using WingtipToys.Models;
+using System.Web.Configuration;
+using System.Configuration;
+using System.Web;
+
 
 namespace WingtipToys
 {
@@ -59,11 +63,17 @@ namespace WingtipToys
             //   appId: "",
             //   appSecret: "");
 
-            //app.UseGoogleAuthentication(new GoogleOAuth2AuthenticationOptions()
-            //{
-            //    ClientId = "",
-            //    ClientSecret = ""
-            //});
+            // Code to access API Secrets
+            string configPath = HttpContext.Current.Server.MapPath("~/secrets.config");
+            ExeConfigurationFileMap fileMap = new ExeConfigurationFileMap();
+            fileMap.ExeConfigFilename = configPath;
+            Configuration config = ConfigurationManager.OpenMappedExeConfiguration(fileMap, ConfigurationUserLevel.None);
+
+            app.UseGoogleAuthentication(new GoogleOAuth2AuthenticationOptions()
+            {
+                ClientId = config.AppSettings.Settings["GoogleAuthClientId"].Value,
+                ClientSecret = config.AppSettings.Settings["GoogleAuthClientSec"].Value
+            });
         }
     }
 }
