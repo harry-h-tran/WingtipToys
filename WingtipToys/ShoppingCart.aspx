@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="~/ShoppingCart.aspx.cs" Inherits="WingtipToys.ShoppingCart" %>
+﻿<%@ Page Title="Shopping Cart" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="~/ShoppingCart.aspx.cs" Inherits="WingtipToys.ShoppingCart" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
     <div id="ShoppingCartTitle" runat="server" class="ContentHead">
@@ -13,7 +13,11 @@
             <asp:TemplateField HeaderText="Quantity">
                 <ItemTemplate>
                     <asp:TextBox ID="PurchaseQuantity" Width="40" runat="server" Text="<%#: Item.Quantity %>"></asp:TextBox>
-
+                </ItemTemplate>
+            </asp:TemplateField>
+            <asp:TemplateField HeaderText="Item Total">
+                <ItemTemplate>
+                    <%#: String.Format("{0:c}", ((Convert.ToDouble(Item.Quantity)) * Convert.ToDouble(Item.Product.UnitPrice))) %>
                 </ItemTemplate>
             </asp:TemplateField>
             <asp:TemplateField HeaderText="Remove Item">

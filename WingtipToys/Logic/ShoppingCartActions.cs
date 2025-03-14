@@ -57,14 +57,17 @@ namespace WingtipToys.Logic
 		{
 			if (HttpContext.Current.Session[CartSessionKey] == null)
 			{
-				HttpContext.Current.Session[CartSessionKey] = HttpContext.Current.User.Identity.Name;
-			}
-			else
-			{
-				// Generate a new random GUID 
-				Guid tempCartId = Guid.NewGuid();
-				HttpContext.Current.Session[CartSessionKey] = tempCartId.ToString();
-			}
+				if(!string.IsNullOrWhiteSpace(HttpContext.Current.User.Identity.Name))
+				{
+                    HttpContext.Current.Session[CartSessionKey] = HttpContext.Current.User.Identity.Name;
+                }
+                else
+                {
+                    // Generate a new random GUID 
+                    Guid tempCartId = Guid.NewGuid();
+                    HttpContext.Current.Session[CartSessionKey] = tempCartId.ToString();
+                }
+            }
 			return HttpContext.Current.Session[CartSessionKey].ToString();
 		}
 
@@ -74,6 +77,17 @@ namespace WingtipToys.Logic
 
 			return _db.ShoppingCartItems.Where(
 				c => c.CartId == ShoppingCartId).ToList();
+		}
+
+		public decimal GetTotal()
+		{
+			ShoppingCartId = GetCartId();
+			decimal? total = decimal.Zero;
+			total = (decimal?)(from cartItems in _db.ShoppingCartItems
+							   where cartItems.CartId == ShoppingCartId
+							   select (int?)cartItems.Quantity *
+							   cartItems.Product.UnitPrice).Sum();
+			return total ?? decimal.Zero;
 		}
 	}
 }
