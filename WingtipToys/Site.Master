@@ -36,13 +36,13 @@
             </Scripts>
         </asp:ScriptManager>
 
-        <nav class="navbar navbar-default navbar-expand-sm navbar-toggleable-sm navbar-dark bg-dark">
+        <nav class="navbar navbar-default navbar-expand-md navbar-toggleable-md navbar-dark bg-dark">
             <div class="container">
                     <a class="navbar-brand" runat="server" href="~/">Wingtip Toys</a>
                     <button type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" title="Toggle navigation" aria-controls="navbarSupportedContent">
                         <span class="navbar-toggler-icon"></span>
                     </button>
-                <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between" id="navbar-main" aria-expanded="false" style="height: 1px;">
+                <div class="navbar-collapse collapse d-md-inline-flex justify-content-between" id="navbar-main" aria-expanded="false" style="height: 1px;">
                     <ul class="nav navbar-nav flex-grow-1">
                         <li class="nav-item"><a class="nav-link" runat="server" href="~/">Home</a></li>
                         <li class="nav-item"><a class="nav-link" runat="server" href="~/About">About</a></li>
