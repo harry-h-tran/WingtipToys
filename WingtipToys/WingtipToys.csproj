@@ -206,6 +206,7 @@
     <Content Include="Catalog\Images\truckbig.png" />
     <Content Include="Catalog\Images\truckearly.png" />
     <Content Include="Catalog\Images\truckfire.png" />
+    <Content Include="Checkout\CheckoutCancel.aspx" />
     <Content Include="Checkout\CheckoutComplete.aspx" />
     <Content Include="Checkout\CheckoutError.aspx" />
     <Content Include="Checkout\CheckoutReview.aspx" />
@@ -427,6 +428,13 @@
     <Compile Include="App_Start\IdentityConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
+    <Compile Include="Checkout\CheckoutCancel.aspx.cs">
+      <DependentUpon>CheckoutCancel.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Checkout\CheckoutCancel.aspx.designer.cs">
+      <DependentUpon>CheckoutCancel.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Checkout\CheckoutComplete.aspx.cs">
       <DependentUpon>CheckoutComplete.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -472,6 +480,7 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Logic\PayPalFunctions.cs" />
     <Compile Include="Logic\ShoppingCartActions.cs" />
     <Compile Include="Models\CartItem.cs" />
     <Compile Include="Models\Category.cs" />

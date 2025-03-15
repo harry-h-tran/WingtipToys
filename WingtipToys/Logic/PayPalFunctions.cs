@@ -32,23 +32,29 @@ public class NVPAPICaller
     private const string PWD = "PWD";
     private const string ACCT = "ACCT";
 
-    string configPath = HttpContext.Current.Server.MapPath("~/secrets.config");
-    ExeConfigurationFileMap fileMap = new ExeConfigurationFileMap();
-    fileMap.ExeConfigFilename = configPath;
-    Configuration config = ConfigurationManager.OpenMappedExeConfiguration(fileMap, ConfigurationUserLevel.None);
-
     //Replace <Your API Username> with your API Username
     //Replace <Your API Password> with your API Password
     //Replace <Your Signature> with your Signature
-    public string APIUsername = config.AppSettings.Settings["PaypalAPIUser"].Value;
-    private string APIPassword = config.AppSettings.Settings["PaypalAPIPass"].Value;
-    private string APISignature = config.AppSettings.Settings["PaypalAPISig"].Value;
+    public string APIUsername;
+    private string APIPassword;
+    private string APISignature;
     private string Subject = "";
     private string BNCode = "PP-ECWizard";
 
     //HttpWebRequest Timeout specified in milliseconds 
     private const int Timeout = 15000;
     private static readonly string[] SECURED_NVPS = new string[] { ACCT, CVV2, SIGNATURE, PWD };
+    public NVPAPICaller()
+    {
+        string configPath = HttpContext.Current.Server.MapPath("~/secrets.config");
+        ExeConfigurationFileMap fileMap = new ExeConfigurationFileMap();
+        fileMap.ExeConfigFilename = configPath;
+        Configuration config = ConfigurationManager.OpenMappedExeConfiguration(fileMap, ConfigurationUserLevel.None);
+
+        APIUsername = config.AppSettings.Settings["PaypalAPIUser"].Value;
+        APIPassword = config.AppSettings.Settings["PaypalAPIPass"].Value;
+        APISignature = config.AppSettings.Settings["PaypalAPISig"].Value;
+    }
 
     public void SetCredentials(string Userid, string Pwd, string Signature)
     {
@@ -65,8 +71,8 @@ public class NVPAPICaller
             host = host_SB;
         }
 
-        string returnURL = "https://localhost:44300/Checkout/CheckoutReview.aspx";
-        string cancelURL = "https://localhost:44300/Checkout/CheckoutCancel.aspx";
+        string returnURL = "https://localhost:44366/Checkout/CheckoutReview.aspx";
+        string cancelURL = "https://localhost:44366/Checkout/CheckoutCancel.aspx";
 
         NVPCodec encoder = new NVPCodec();
         encoder["METHOD"] = "SetExpressCheckout";
