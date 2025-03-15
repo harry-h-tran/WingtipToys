@@ -42,7 +42,12 @@ namespace WingtipToys.Logic
                 UserName = "canEditUser@wingtiptoys.com",
                 Email = "canEditUser@wingtiptoys.com"
             };
-            IdUserResult = userMgr.Create(appUser, ConfigurationManager.AppSettings["AppUserPasswordKey"]);
+            string configPath = HttpContext.Current.Server.MapPath("~/secrets.config");
+            ExeConfigurationFileMap fileMap = new ExeConfigurationFileMap();
+            fileMap.ExeConfigFilename = configPath;
+            Configuration config = ConfigurationManager.OpenMappedExeConfiguration(fileMap, ConfigurationUserLevel.None);
+
+            IdUserResult = userMgr.Create(appUser, config.AppSettings.Settings["AppUserPasswordKey"].Value);
 
             // If the new "canEdit" user was successfully created, 
             // add the "canEdit" user to the "canEdit" role. 
