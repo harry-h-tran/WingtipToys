@@ -27,6 +27,12 @@ namespace WingtipToys
             //Create custom role and user
             RoleActions roleActions = new RoleActions();
             roleActions.AddUserAndRole();
+
+            RouteActions routeActions = new RouteActions();
+            routeActions.RegisterCustomRoutes(RouteTable.Routes);
+
         }
+        
+
     }
 }
