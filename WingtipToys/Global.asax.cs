@@ -8,6 +8,8 @@ using System.Web.Security;
 using System.Web.SessionState;
 using System.Data.Entity;
 using WingtipToys.Models;
+using WingtipToys.Logic;
+using System.Diagnostics;
 
 namespace WingtipToys
 {
@@ -21,6 +23,16 @@ namespace WingtipToys
 
             // Initialize the product database.
             Database.SetInitializer(new ProductDatabaseInitializer());
+
+            //Create custom role and user
+            RoleActions roleActions = new RoleActions();
+            roleActions.AddUserAndRole();
+
+            RouteActions routeActions = new RouteActions();
+            routeActions.RegisterCustomRoutes(RouteTable.Routes);
+
         }
+        
+
     }
 }

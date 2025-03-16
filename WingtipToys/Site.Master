@@ -44,6 +44,7 @@
                     </button>
                 <div class="navbar-collapse collapse d-md-inline-flex justify-content-between" id="navbar-main" aria-expanded="false" style="height: 1px;">
                     <ul class="nav navbar-nav flex-grow-1">
+                        <li class="nav-item"><a class="nav-link" runat="server" ID="adminLink" href="~/Admin/AdminPage" visible="false">Admin</a></li>
                         <li class="nav-item"><a class="nav-link" runat="server" href="~/">Home</a></li>
                         <li class="nav-item"><a class="nav-link" runat="server" href="~/About">About</a></li>
                         <li class="nav-item"><a class="nav-link" runat="server" href="~/Contact">Contact</a></li>
@@ -84,7 +85,7 @@
                 SelectMethod="GetCategories" >
                 <ItemTemplate>
                     <b style="font-size: large; font-style: normal">
-                        <a href="/ProductList.aspx?id=<%#: Item.CategoryID %>">
+                        <a href="<%#: GetRouteUrl("ProductsbyCategoryRoute", new {categoryName= Item.CategoryName}) %>">
                         <%#: Item.CategoryName %>
                         </a>
                     </b>
